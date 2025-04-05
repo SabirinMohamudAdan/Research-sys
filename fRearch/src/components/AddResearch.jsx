@@ -1,14 +1,32 @@
 import React from 'react';
-import { FilePlus2 } from 'lucide-react'; // Add this import for the icon
+import { FilePlus2 } from 'lucide-react';
 
-const AddResearch = ({ title, setTitle, author, setAuthor, summary, setSummary, handleSubmit }) => {
+const AddResearch = ({
+  title,
+  setTitle,
+  author,
+  setAuthor,
+  summary,
+  setSummary,
+  handleSubmit,
+}) => {
+  // Local submit handler to check if inputs are filled
+  const onSubmit = (e) => {
+    e.preventDefault(); // prevent default submit
+    if (!title.trim() || !author.trim() || !summary.trim()) {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
+    handleSubmit(e); // call original handler if all inputs are filled
+  };
+
   return (
     <section className="bg-white p-6 rounded-3xl shadow-lg mb-10">
       <div className="flex items-center gap-2 mb-4">
-        <FilePlus2 className="w-5 h-5 text-blue-600" /> {/* Now the icon should render */}
+        <FilePlus2 className="w-5 h-5 text-blue-600" />
         <h2 className="text-xl font-semibold text-gray-800">Add New Research</h2>
       </div>
-      <form onSubmit={handleSubmit} className="grid gap-4">
+      <form onSubmit={onSubmit} className="grid gap-4">
         <input
           className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
           placeholder="Title"
