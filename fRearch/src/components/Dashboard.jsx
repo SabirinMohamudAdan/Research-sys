@@ -18,9 +18,10 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
   return (
     <div className="flex">
       {/* Sidebar */}
+      
       <div className="w-64 bg-blue-900 text-white h-screen p-6">
-        <h2 className="text-3xl font-bold mb-8">Dashboard</h2>
-        <ul>
+        <h2 className="text-3xl font-bold mb-8 pt-4">Dashboard</h2>
+        <ul className='pt-20 pl-4'>
           <li className="mb-6 text-lg">Overview</li>
           <li className="mb-6 text-lg">Researches</li>
           <li className="mb-6 text-lg">Authors</li>
@@ -30,8 +31,12 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
 
       {/* Dashboard Content */}
       <div className="flex-1 p-8">
-        <h3 className="text-2xl font-semibold text-gray-800 mb-6">Overview</h3>
+      <header className="items-center gap-4 mb-8">
+          
+          <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
+        </header>
 
+       
         {/* Total counts section */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Total Authors Card */}

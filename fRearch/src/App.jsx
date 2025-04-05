@@ -192,12 +192,12 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 p-6">
-        <div className="max-w-6xl mx-auto">
-          <header className="flex items-center gap-4 mb-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 ">
+        <div className="">
+          {/* <header className="flex items-center gap-4 mb-8">
             <LayoutDashboard className="w-8 h-8 text-blue-700" />
             <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
-          </header>
+          </header> */}
 
           <Routes>
             <Route
