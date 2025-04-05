@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useResearchData = () => {
@@ -18,7 +18,11 @@ const useResearchData = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/api/research", { title, summary, author });
+    await axios.post("http://localhost:5000/api/research", {
+      title,
+      summary,
+      author,
+    });
     setTitle("");
     setSummary("");
     setAuthor("");
@@ -36,7 +40,7 @@ const useResearchData = () => {
     author,
     setAuthor,
     handleSubmit,
-    uniqueAuthors
+    uniqueAuthors,
   };
 };
 
