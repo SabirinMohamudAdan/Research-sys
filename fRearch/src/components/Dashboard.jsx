@@ -32,7 +32,8 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
       <div className="flex-1 p-8">
         <h3 className="text-2xl font-semibold text-gray-800 mb-6">Overview</h3>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Total counts section */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Total Authors Card */}
           <div className="bg-blue-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
             <div className="flex items-center gap-4 mb-4">
@@ -40,11 +41,6 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
               <h4 className="text-xl font-semibold text-blue-700">Total Authors</h4>
             </div>
             <p className="text-gray-700 text-lg font-bold">{totalAuthors}</p>
-            <ProgressBar
-              percentage={progressAuthors}
-              label="Authors Progress"
-              color="bg-blue-600"
-            />
           </div>
 
           {/* Total Researches Card */}
@@ -54,6 +50,24 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
               <h4 className="text-xl font-semibold text-green-700">Total Researches</h4>
             </div>
             <p className="text-gray-700 text-lg font-bold">{totalResearches}</p>
+          </div>
+        </div>
+
+        {/* Progress bars section */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Authors Progress */}
+          <div className="bg-blue-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+            <h4 className="text-xl font-semibold text-blue-700 mb-4">Authors Progress</h4>
+            <ProgressBar
+              percentage={progressAuthors}
+              label="Authors Progress"
+              color="bg-blue-600"
+            />
+          </div>
+
+          {/* Researches Progress */}
+          <div className="bg-green-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+            <h4 className="text-xl font-semibold text-green-700 mb-4">Researches Progress</h4>
             <ProgressBar
               percentage={progressResearches}
               label="Researches Progress"
