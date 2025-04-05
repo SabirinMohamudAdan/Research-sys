@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, FileText } from 'lucide-react'; // Importing icons from lucide-react
+import { Users, FileText, Settings, Home, HelpCircle } from 'lucide-react'; // More icons for the sidebar
 
 // A simple progress bar component
 const ProgressBar = ({ percentage, label, color }) => (
@@ -18,29 +18,37 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
   return (
     <div className="flex">
       {/* Sidebar */}
-      
       <div className="w-64 bg-blue-900 text-white h-screen p-6">
         <h2 className="text-3xl font-bold mb-8 pt-4">Dashboard</h2>
-        <ul className='pt-20 pl-4'>
-          <li className="mb-6 text-lg">Overview</li>
-          <li className="mb-6 text-lg">Researches</li>
-          <li className="mb-6 text-lg">Authors</li>
-          <li className="mb-6 text-lg">Settings</li>
+        <ul className="pt-20 pl-4">
+          <li className="mb-6 text-lg flex items-center gap-4">
+            <Home className="w-6 h-6 text-white" /> Overview
+          </li>
+          <li className="mb-6 text-lg flex items-center gap-4">
+            <FileText className="w-6 h-6 text-white" /> Researches
+          </li>
+          <li className="mb-6 text-lg flex items-center gap-4">
+            <Users className="w-6 h-6 text-white" /> Authors
+          </li>
+          <li className="mb-6 text-lg flex items-center gap-4">
+            <Settings className="w-6 h-6 text-white" /> Settings
+          </li>
+          <li className="mb-6 text-lg flex items-center gap-4">
+            <HelpCircle className="w-6 h-6 text-white" /> Help
+          </li>
         </ul>
       </div>
 
       {/* Dashboard Content */}
-      <div className="flex-1 p-8">
-      <header className="items-center gap-4 mb-8">
-          
+      <div className="flex-1 p-8 bg-gray-50">
+        <header className="items-center gap-4 mb-8">
           <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
         </header>
 
-       
         {/* Total counts section */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* Total Authors Card */}
-          <div className="bg-blue-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
             <div className="flex items-center gap-4 mb-4">
               <Users className="w-6 h-6 text-blue-700" />
               <h4 className="text-xl font-semibold text-blue-700">Total Authors</h4>
@@ -49,7 +57,7 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
           </div>
 
           {/* Total Researches Card */}
-          <div className="bg-green-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
             <div className="flex items-center gap-4 mb-4">
               <FileText className="w-6 h-6 text-green-700" />
               <h4 className="text-xl font-semibold text-green-700">Total Researches</h4>
@@ -61,7 +69,7 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
         {/* Progress bars section */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Authors Progress */}
-          <div className="bg-blue-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
             <h4 className="text-xl font-semibold text-blue-700 mb-4">Authors Progress</h4>
             <ProgressBar
               percentage={progressAuthors}
@@ -71,7 +79,7 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
           </div>
 
           {/* Researches Progress */}
-          <div className="bg-green-100 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
             <h4 className="text-xl font-semibold text-green-700 mb-4">Researches Progress</h4>
             <ProgressBar
               percentage={progressResearches}
