@@ -96,7 +96,7 @@
 // export default Dashboard;
 
 import React from 'react';
-import { Users, FileText, Settings, Home, HelpCircle } from 'lucide-react'; // More icons for the sidebar
+import { Users, FileText, Settings, Home, HelpCircle } from 'lucide-react'; // Icons for the sidebar
 
 // A simple circular progress component
 const CircularProgress = ({ percentage, label, colorStart, colorEnd }) => {
@@ -122,7 +122,7 @@ const CircularProgress = ({ percentage, label, colorStart, colorEnd }) => {
           cy="60"
           r={radius}
           fill="transparent"
-          stroke={`url(#gradient)`}
+          stroke={`url(#gradient)`} 
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
@@ -171,30 +171,30 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
         </header>
 
         {/* Total counts section */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 gap-8 mb-10">
           {/* Total Authors Card */}
-          <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
-            <div className="flex items-center gap-4 mb-4">
-              <Users className="w-6 h-6 text-blue-700" />
-              <h4 className="text-xl font-semibold text-blue-700">Total Authors</h4>
+          <div className="bg-gradient-to-r from-indigo-500 to-indigo-700 p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center gap-6 mb-4">
+              <Users className="w-8 h-8 text-white" />
+              <h4 className="text-2xl font-semibold text-white">Total Authors</h4>
             </div>
-            <p className="text-gray-700 text-lg font-bold">{totalAuthors}</p>
+            <p className="text-white text-4xl font-bold">{totalAuthors}</p>
           </div>
 
           {/* Total Researches Card */}
-          <div className="bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
-            <div className="flex items-center gap-4 mb-4">
-              <FileText className="w-6 h-6 text-green-700" />
-              <h4 className="text-xl font-semibold text-green-700">Total Researches</h4>
+          <div className="bg-gradient-to-r from-teal-500 to-teal-700 p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center gap-6 mb-4">
+              <FileText className="w-8 h-8 text-white" />
+              <h4 className="text-2xl font-semibold text-white">Total Researches</h4>
             </div>
-            <p className="text-gray-700 text-lg font-bold">{totalResearches}</p>
+            <p className="text-white text-4xl font-bold">{totalResearches}</p>
           </div>
         </div>
 
         {/* Progress Circles section */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Authors Progress Circle */}
-          <div className="bg-gradient-to-br from-blue-100 to-blue-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-r from-indigo-200 to-indigo-500 p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
             <CircularProgress
               percentage={progressAuthors}
               label="Authors Progress"
@@ -204,7 +204,7 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
           </div>
 
           {/* Researches Progress Circle */}
-          <div className="bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+          <div className="bg-gradient-to-r from-teal-200 to-teal-500 p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300">
             <CircularProgress
               percentage={progressResearches}
               label="Researches Progress"
@@ -219,3 +219,4 @@ const Dashboard = ({ totalAuthors, totalResearches, progressAuthors, progressRes
 };
 
 export default Dashboard;
+
