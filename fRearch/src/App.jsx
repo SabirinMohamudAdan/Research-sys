@@ -88,11 +88,94 @@
 // }
 
 // export default App;
+// import React from "react";
+// import useResearchData from "./components/ResearchData";
+// import Dashboard from "./components/Dashboard";
+// import { motion } from "framer-motion";
+// import { LayoutDashboard, FilePlus2 } from "lucide-react";
+
+// function App() {
+//   const {
+//     researches,
+//     title,
+//     setTitle,
+//     summary,
+//     setSummary,
+//     author,
+//     setAuthor,
+//     handleSubmit,
+//     uniqueAuthors,
+//   } = useResearchData();
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 p-6">
+//       <div className="max-w-6xl mx-auto">
+//         <header className="flex items-center gap-4 mb-8">
+//           <LayoutDashboard className="w-8 h-8 text-blue-700" />
+//           <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
+//         </header>
+
+//         <Dashboard
+//           totalAuthors={uniqueAuthors.size}
+//           totalResearches={researches.length}
+//         />
+
+//         <section className="bg-white p-6 rounded-3xl shadow-lg mb-10">
+//           <div className="flex items-center gap-2 mb-4">
+//             <FilePlus2 className="w-5 h-5 text-blue-600" />
+//             <h2 className="text-xl font-semibold text-gray-800">Add New Research</h2>
+//           </div>
+//           <form onSubmit={handleSubmit} className="grid gap-4">
+//             <input
+//               className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+//               placeholder="Title"
+//               value={title}
+//               onChange={(e) => setTitle(e.target.value)}
+//             />
+//             <input
+//               className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+//               placeholder="Author"
+//               value={author}
+//               onChange={(e) => setAuthor(e.target.value)}
+//             />
+//             <textarea
+//               className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+//               placeholder="Summary"
+//               value={summary}
+//               onChange={(e) => setSummary(e.target.value)}
+//             ></textarea>
+//             <button className="bg-blue-700 hover:bg-blue-800 text-white p-3 rounded-xl font-semibold transition">
+//               Submit Research
+//             </button>
+//           </form>
+//         </section>
+
+//         <section>
+//           <h2 className="text-2xl font-bold text-gray-800 mb-4">All Researches</h2>
+//           <div className="grid gap-4">
+//             {researches.map((item, i) => (
+//               <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+//                 <div className="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition">
+//                   <h3 className="text-xl font-semibold text-blue-700">{item.title}</h3>
+//                   <p className="text-sm text-gray-500 mb-1">By {item.author}</p>
+//                   <p className="text-gray-700">{item.summary}</p>
+//                 </div>
+//               </motion.div>
+//             ))}
+//           </div>
+//         </section>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import useResearchData from "./components/ResearchData";
 import Dashboard from "./components/Dashboard";
-import { motion } from "framer-motion";
-import { LayoutDashboard, FilePlus2 } from "lucide-react";
+import AddResearch from "./components/AddResearch";
+import { LayoutDashboard } from "lucide-react";
 
 function App() {
   const {
@@ -108,64 +191,39 @@ function App() {
   } = useResearchData();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        <header className="flex items-center gap-4 mb-8">
-          <LayoutDashboard className="w-8 h-8 text-blue-700" />
-          <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
-        </header>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 p-6">
+        <div className="max-w-6xl mx-auto">
+          <header className="flex items-center gap-4 mb-8">
+            <LayoutDashboard className="w-8 h-8 text-blue-700" />
+            <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
+          </header>
 
-        <Dashboard
-          totalAuthors={uniqueAuthors.size}
-          totalResearches={researches.length}
-        />
-
-        <section className="bg-white p-6 rounded-3xl shadow-lg mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <FilePlus2 className="w-5 h-5 text-blue-600" />
-            <h2 className="text-xl font-semibold text-gray-800">Add New Research</h2>
-          </div>
-          <form onSubmit={handleSubmit} className="grid gap-4">
-            <input
-              className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Dashboard totalAuthors={uniqueAuthors.size} totalResearches={researches.length} />
+              }
             />
-            <input
-              className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
-              placeholder="Author"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
+            <Route
+              path="/add-research"
+              element={
+                <AddResearch
+                  title={title}
+                  setTitle={setTitle}
+                  author={author}
+                  setAuthor={setAuthor}
+                  summary={summary}
+                  setSummary={setSummary}
+                  handleSubmit={handleSubmit}
+                />
+              }
             />
-            <textarea
-              className="border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
-              placeholder="Summary"
-              value={summary}
-              onChange={(e) => setSummary(e.target.value)}
-            ></textarea>
-            <button className="bg-blue-700 hover:bg-blue-800 text-white p-3 rounded-xl font-semibold transition">
-              Submit Research
-            </button>
-          </form>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">All Researches</h2>
-          <div className="grid gap-4">
-            {researches.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                <div className="bg-white p-6 rounded-3xl shadow-md hover:shadow-lg transition">
-                  <h3 className="text-xl font-semibold text-blue-700">{item.title}</h3>
-                  <p className="text-sm text-gray-500 mb-1">By {item.author}</p>
-                  <p className="text-gray-700">{item.summary}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
