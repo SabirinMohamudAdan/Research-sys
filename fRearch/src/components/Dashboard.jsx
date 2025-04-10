@@ -652,243 +652,247 @@
 
 
 
- import React, { useState, useEffect, useMemo } from 'react';
-import { Users, FileText, Settings, Home, HelpCircle } from 'lucide-react';
-import PropTypes from 'prop-types';
+//  import React, { useState, useEffect, useMemo } from 'react';
+// import { Users, FileText, Settings, Home, HelpCircle } from 'lucide-react';
+// import PropTypes from 'prop-types';
 
-/**
- * CircularProgress component displays a circular progress indicator with gradient colors
- * @param {number} percentage - The completion percentage (0-100)
- * @param {string} label - Accessibility label for the progress circle
- * @param {string} colorStart - Starting color for the gradient
- * @param {string} colorEnd - Ending color for the gradient
- * @param {string} id - Unique identifier for SVG elements
- * @returns {JSX.Element} Circular progress component
- */
-const CircularProgress = ({ percentage = 0, label, colorStart, colorEnd, id }) => {
-  const strokeWidth = 10;
-  const radius = 50;
-  const circumference = useMemo(() => 2 * Math.PI * radius, [radius]);
-  const [strokeDashoffset, setStrokeDashoffset] = useState(circumference);
+// /**
+//  * CircularProgress component displays a circular progress indicator with gradient colors
+//  * @param {number} percentage - The completion percentage (0-100)
+//  * @param {string} label - Accessibility label for the progress circle
+//  * @param {string} colorStart - Starting color for the gradient
+//  * @param {string} colorEnd - Ending color for the gradient
+//  * @param {string} id - Unique identifier for SVG elements
+//  * @returns {JSX.Element} Circular progress component
+//  */
+// const CircularProgress = ({ percentage = 0, label, colorStart, colorEnd, id }) => {
+//   const strokeWidth = 10;
+//   const radius = 50;
+//   const circumference = useMemo(() => 2 * Math.PI * radius, [radius]);
+//   const [strokeDashoffset, setStrokeDashoffset] = useState(circumference);
 
-  useEffect(() => {
-    // Clamp percentage between 0-100 and calculate offset
-    const clampedPercentage = Math.min(100, Math.max(0, Number(percentage)));
-    const offset = circumference - (clampedPercentage / 100) * circumference;
-    setStrokeDashoffset(offset);
-  }, [percentage, circumference]);
+//   useEffect(() => {
+//     // Clamp percentage between 0-100 and calculate offset
+//     const clampedPercentage = Math.min(100, Math.max(0, Number(percentage)));
+//     const offset = circumference - (clampedPercentage / 100) * circumference;
+//     setStrokeDashoffset(offset);
+//   }, [percentage, circumference]);
 
-  return (
-    <div className="flex flex-col items-center mb-6" role="progressbar" aria-valuenow={Math.round(percentage)} aria-valuemin="0" aria-valuemax="100">
-      <h3 className="text-sm font-semibold text-gray-700 mb-2">{label}</h3>
-      <svg 
-        className="w-24 h-24 transform -rotate-90"
-        width="120" 
-        height="120" 
-        viewBox="0 0 120 120"
-        aria-hidden="true"
-      >
-        <circle
-          cx="60"
-          cy="60"
-          r={radius}
-          fill="transparent"
-          stroke="#e6e6e6"
-          strokeWidth={strokeWidth}
-        />
-        <circle
-          cx="60"
-          cy="60"
-          r={radius}
-          fill="transparent"
-          stroke={`url(#gradient-${id})`}
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          style={{ transition: 'stroke-dashoffset 0.5s ease-out' }}
-        />
-        <defs>
-          <linearGradient id={`gradient-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={colorStart} />
-            <stop offset="100%" stopColor={colorEnd} />
-          </linearGradient>
-        </defs>
-      </svg>
-      <span className="text-lg font-bold text-gray-700">
-        {`${Math.round(percentage)}%`}
-      </span>
-    </div>
-  );
-};
+//   return (
+//     <div className="flex flex-col items-center mb-6" role="progressbar" aria-valuenow={Math.round(percentage)} aria-valuemin="0" aria-valuemax="100">
+//       <h3 className="text-sm font-semibold text-gray-700 mb-2">{label}</h3>
+//       <svg 
+//         className="w-24 h-24 transform -rotate-90"
+//         width="120" 
+//         height="120" 
+//         viewBox="0 0 120 120"
+//         aria-hidden="true"
+//       >
+//         <circle
+//           cx="60"
+//           cy="60"
+//           r={radius}
+//           fill="transparent"
+//           stroke="#e6e6e6"
+//           strokeWidth={strokeWidth}
+//         />
+//         <circle
+//           cx="60"
+//           cy="60"
+//           r={radius}
+//           fill="transparent"
+//           stroke={`url(#gradient-${id})`}
+//           strokeWidth={strokeWidth}
+//           strokeDasharray={circumference}
+//           strokeDashoffset={strokeDashoffset}
+//           strokeLinecap="round"
+//           style={{ transition: 'stroke-dashoffset 0.5s ease-out' }}
+//         />
+//         <defs>
+//           <linearGradient id={`gradient-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+//             <stop offset="0%" stopColor={colorStart} />
+//             <stop offset="100%" stopColor={colorEnd} />
+//           </linearGradient>
+//         </defs>
+//       </svg>
+//       <span className="text-lg font-bold text-gray-700">
+//         {`${Math.round(percentage)}%`}
+//       </span>
+//     </div>
+//   );
+// };
 
-CircularProgress.propTypes = {
-  percentage: PropTypes.number,
-  label: PropTypes.string.isRequired,
-  colorStart: PropTypes.string.isRequired,
-  colorEnd: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-};
+// CircularProgress.propTypes = {
+//   percentage: PropTypes.number,
+//   label: PropTypes.string.isRequired,
+//   colorStart: PropTypes.string.isRequired,
+//   colorEnd: PropTypes.string.isRequired,
+//   id: PropTypes.string.isRequired,
+// };
 
-/**
- * NavigationItem component for sidebar links
- * @param {Object} props - Component props
- * @param {React.ElementType} props.icon - Icon component
- * @param {string} props.label - Navigation label
- * @param {boolean} [props.active] - Whether the item is active
- * @returns {JSX.Element} Navigation list item
- */
-const NavigationItem = ({ icon: Icon, label, active = false }) => (
-  <li className={`mb-6 text-lg flex items-center gap-4 ${active ? 'font-bold' : ''}`}>
-    <Icon className="w-6 h-6 text-white" aria-hidden="true" />
-    <span>{label}</span>
-  </li>
-);
+// /**
+//  * NavigationItem component for sidebar links
+//  * @param {Object} props - Component props
+//  * @param {React.ElementType} props.icon - Icon component
+//  * @param {string} props.label - Navigation label
+//  * @param {boolean} [props.active] - Whether the item is active
+//  * @returns {JSX.Element} Navigation list item
+//  */
+// const NavigationItem = ({ icon: Icon, label, active = false }) => (
+//   <li className={`mb-6 text-lg flex items-center gap-4 ${active ? 'font-bold' : ''}`}>
+//     <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+//     <span>{label}</span>
+//   </li>
+// );
 
-NavigationItem.propTypes = {
-  icon: PropTypes.elementType.isRequired,
-  label: PropTypes.string.isRequired,
-  active: PropTypes.bool,
-};
+// NavigationItem.propTypes = {
+//   icon: PropTypes.elementType.isRequired,
+//   label: PropTypes.string.isRequired,
+//   active: PropTypes.bool,
+// };
 
-/**
- * MetricCard component for displaying key metrics
- * @param {Object} props - Component props
- * @param {React.ElementType} props.icon - Icon component
- * @param {string} props.title - Card title
- * @param {number} props.value - Metric value
- * @param {string} props.gradientFrom - Gradient start color
- * @param {string} props.gradientTo - Gradient end color
- * @returns {JSX.Element} Metric card component
- */
-const MetricCard = ({ icon: Icon, title, value, gradientFrom, gradientTo }) => (
-  <article 
-    className={`bg-gradient-to-r from-${gradientFrom} to-${gradientTo} p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300`}
-    aria-labelledby={`${title.toLowerCase().replace(' ', '-')}-title`}
-  >
-    <div className="flex items-center gap-6 mb-4">
-      <Icon className="w-8 h-8 text-white" aria-hidden="true" />
-      <h3 id={`${title.toLowerCase().replace(' ', '-')}-title`} className="text-2xl font-semibold text-white">
-        {title}
-      </h3>
-    </div>
-    <p className="text-white text-4xl font-bold">{value.toLocaleString()}</p>
-  </article>
-);
+// /**
+//  * MetricCard component for displaying key metrics
+//  * @param {Object} props - Component props
+//  * @param {React.ElementType} props.icon - Icon component
+//  * @param {string} props.title - Card title
+//  * @param {number} props.value - Metric value
+//  * @param {string} props.gradientFrom - Gradient start color
+//  * @param {string} props.gradientTo - Gradient end color
+//  * @returns {JSX.Element} Metric card component
+//  */
+// const MetricCard = ({ icon: Icon, title, value, gradientFrom, gradientTo }) => (
+//   <article 
+//     className={`bg-gradient-to-r from-${gradientFrom} to-${gradientTo} p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300`}
+//     aria-labelledby={`${title.toLowerCase().replace(' ', '-')}-title`}
+//   >
+//     <div className="flex items-center gap-6 mb-4">
+//       <Icon className="w-8 h-8 text-white" aria-hidden="true" />
+//       <h3 id={`${title.toLowerCase().replace(' ', '-')}-title`} className="text-2xl font-semibold text-white">
+//         {title}
+//       </h3>
+//     </div>
+//     <p className="text-white text-4xl font-bold">{value.toLocaleString()}</p>
+//   </article>
+// );
 
-MetricCard.propTypes = {
-  icon: PropTypes.elementType.isRequired,
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  gradientFrom: PropTypes.string.isRequired,
-  gradientTo: PropTypes.string.isRequired,
-};
+// MetricCard.propTypes = {
+//   icon: PropTypes.elementType.isRequired,
+//   title: PropTypes.string.isRequired,
+//   value: PropTypes.number.isRequired,
+//   gradientFrom: PropTypes.string.isRequired,
+//   gradientTo: PropTypes.string.isRequired,
+// };
 
-/**
- * Dashboard component - Main application dashboard
- * @param {Object} props - Component props
- * @param {number} [props.totalAuthors=0] - Total authors count
- * @param {number} [props.totalResearches=0] - Total researches count
- * @param {number} [props.progressAuthors=0] - Authors progress percentage
- * @param {number} [props.progressResearches=0] - Researches progress percentage
- * @returns {JSX.Element} Dashboard component
- */
-const Dashboard = ({ 
-  totalAuthors = 0, 
-  totalResearches = 0, 
-  progressAuthors = 0, 
-  progressResearches = 0 
-}) => {
-  const navItems = [
-    { icon: Home, label: 'Overview', active: true },
-    { icon: FileText, label: 'Researches' },
-    { icon: Users, label: 'Authors' },
-    { icon: Settings, label: 'Settings' },
-    { icon: HelpCircle, label: 'Help' },
-  ];
+// /**
+//  * Dashboard component - Main application dashboard
+//  * @param {Object} props - Component props
+//  * @param {number} [props.totalAuthors=0] - Total authors count
+//  * @param {number} [props.totalResearches=0] - Total researches count
+//  * @param {number} [props.progressAuthors=0] - Authors progress percentage
+//  * @param {number} [props.progressResearches=0] - Researches progress percentage
+//  * @returns {JSX.Element} Dashboard component
+//  */
+// const Dashboard = ({ 
+//   totalAuthors = 0, 
+//   totalResearches = 0, 
+//   progressAuthors = 0, 
+//   progressResearches = 0 
+// }) => {
+//   const navItems = [
+//     { icon: Home, label: 'Overview', active: true },
+//     { icon: FileText, label: 'Researches' },
+//     { icon: Users, label: 'Authors' },
+//     { icon: Settings, label: 'Settings' },
+//     { icon: HelpCircle, label: 'Help' },
+//   ];
 
-  return (
-    <div className="flex min-h-screen">
-      {/* Sidebar Navigation */}
-      <aside className="w-64 bg-blue-900 text-white p-6 flex-shrink-0">
-        <header className="mb-8 pt-4">
-          <h2 className="text-3xl font-bold">Dashboard</h2>
-        </header>
+//   return (
+//     <div className="flex min-h-screen">
+//       {/* Sidebar Navigation */}
+//       <aside className="w-64 bg-blue-900 text-white p-6 flex-shrink-0">
+//         <header className="mb-8 pt-4">
+//           <h2 className="text-3xl font-bold">Dashboard</h2>
+//         </header>
         
-        <nav aria-label="Main navigation">
-          <ul className="pt-8">
-            {navItems.map((item, index) => (
-              <NavigationItem 
-                key={index}
-                icon={item.icon}
-                label={item.label}
-                active={item.active}
-              />
-            ))}
-          </ul>
-        </nav>
-      </aside>
+//         <nav aria-label="Main navigation">
+//           <ul className="pt-8">
+//             {navItems.map((item, index) => (
+//               <NavigationItem 
+//                 key={index}
+//                 icon={item.icon}
+//                 label={item.label}
+//                 active={item.active}
+//               />
+//             ))}
+//           </ul>
+//         </nav>
+//       </aside>
 
-      {/* Main Content Area */}
-      <main className="flex-1 p-8 bg-gray-50">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
-        </header>
+//       {/* Main Content Area */}
+//       <main className="flex-1 p-8 bg-gray-50">
+//         <header className="mb-8">
+//           <h1 className="text-3xl font-bold text-blue-800">Research Dashboard</h1>
+//         </header>
 
-        {/* Metrics Section */}
-        <section className="grid md:grid-cols-2 gap-8 mb-10">
-          <MetricCard 
-            icon={Users}
-            title="Total Authors"
-            value={totalAuthors}
-            gradientFrom="indigo-500"
-            gradientTo="indigo-700"
-          />
+//         {/* Metrics Section */}
+//         <section className="grid md:grid-cols-2 gap-8 mb-10">
+//           <MetricCard 
+//             icon={Users}
+//             title="Total Authors"
+//             value={totalAuthors}
+//             gradientFrom="indigo-500"
+//             gradientTo="indigo-700"
+//           />
           
-          <MetricCard 
-            icon={FileText}
-            title="Total Researches"
-            value={totalResearches}
-            gradientFrom="teal-500"
-            gradientTo="teal-700"
-          />
-        </section>
+//           <MetricCard 
+//             icon={FileText}
+//             title="Total Researches"
+//             value={totalResearches}
+//             gradientFrom="teal-500"
+//             gradientTo="teal-700"
+//           />
+//         </section>
 
-        {/* Progress Indicators Section */}
-        <section className="grid md:grid-cols-2 gap-8">
-          <article className="bg-white p-6 rounded-2xl shadow-lg">
-            <CircularProgress
-              percentage={progressAuthors}
-              label="Authors Progress"
-              colorStart="#4C9BF0"
-              colorEnd="#1D4E89"
-              id="authors"
-            />
-          </article>
+//         {/* Progress Indicators Section */}
+//         <section className="grid md:grid-cols-2 gap-8">
+//           <article className="bg-white p-6 rounded-2xl shadow-lg">
+//             <CircularProgress
+//               percentage={progressAuthors}
+//               label="Authors Progress"
+//               colorStart="#4C9BF0"
+//               colorEnd="#1D4E89"
+//               id="authors"
+//             />
+//           </article>
           
-          <article className="bg-white p-6 rounded-2xl shadow-lg">
-            <CircularProgress
-              percentage={progressResearches}
-              label="Researches Progress"
-              colorStart="#34D399"
-              colorEnd="#10B981"
-              id="researches"
-            />
-          </article>
-        </section>
-      </main>
-    </div>
-  );
-};
+//           <article className="bg-white p-6 rounded-2xl shadow-lg">
+//             <CircularProgress
+//               percentage={progressResearches}
+//               label="Researches Progress"
+//               colorStart="#34D399"
+//               colorEnd="#10B981"
+//               id="researches"
+//             />
+//           </article>
+//         </section>
+//       </main>
+//     </div>
+//   );
+// };
 
-Dashboard.propTypes = {
-  totalAuthors: PropTypes.number,
-  totalResearches: PropTypes.number,
-  progressAuthors: PropTypes.number,
-  progressResearches: PropTypes.number,
-};
+// Dashboard.propTypes = {
+//   totalAuthors: PropTypes.number,
+//   totalResearches: PropTypes.number,
+//   progressAuthors: PropTypes.number,
+//   progressResearches: PropTypes.number,
+// };
 
-export default Dashboard;
+// export default Dashboard;
+
+
+
+
 
 
 // import React, { useState, useEffect, useMemo, useCallback } from 'react';
