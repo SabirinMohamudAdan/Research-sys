@@ -31,4 +31,4 @@ app.post("/api/research", async (req, res) => {
   res.status(201).json({ message: "Research added" });
 });
 
-app.listen(5000, () => console.log("Server running on port 500"));
+app.listen(6000, () => console.log("Server running on port 500"));
